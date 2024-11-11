@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<style>
+</style>
+<body>
+    <form role="search">
+        <input id="Inputsearch" type="search" placeholder="Search..." autofocus required />
+        <button type="submit" onclick="Search()">Go</button>    
+      </form>
+	<div id = "results"></div>
+	<script>
+    
+        async function Search() {
+            event.preventDefault();  // Prevent the form from submitting normally
+
+            const query = document.getElementById('Inputsearch').value;
+            console.log('Searching for:', query);  // Debugging line to check the query value
+
+            try {
+                const fetchResponse = await fetch(`http://localhost:5000/search?q=${encodeURIComponent(query)}`);
+                const results = await fetchResponse.json();
+                console.log('Search results:', results);  // Log the results
+
+                const div = document.getElementById('results');
+                div.innerHTML = '';  // Clear previous results
+
+                // Assuming the response is a list of results with title, href, and body
+                results.forEach(item => {
+                    const resultItem = document.createElement('div');
+                    resultItem.innerHTML = `<h3><a href="${item.href}">${item.title}</a></h3><p>${item.body}</p>`;
+                    div.appendChild(resultItem);
+                });
+            } catch (error) {
+                console.error('Error fetching search results:', error);  // Log any errors
+            }
+        }
+    </script>
+</body>
+</html>
