@@ -6,17 +6,22 @@
 <style>
 </style>
 <body>
-    <form role="search">
-        <input id="Inputsearch" type="search" placeholder="Search..." autofocus required />
-        <button type="submit" onclick="Search()">Go</button>    
-      </form>
+    <div class="wrap">
+        <div class="search">
+           <input type="text" id = "InputSearch" class="searchTerm" placeholder="What are you looking for?">
+           <button type="submit" onclick = "Search()" class="searchButton">
+             <i class="fa fa-search">Go</i>
+          </button>
+        </div>
+     </div>
+
 	<div id = "results"></div>
 	<script>
     
         async function Search() {
             event.preventDefault();  // Prevent the form from submitting normally
 
-            const query = document.getElementById('Inputsearch').value;
+            const query = document.getElementById('InputSearch').value;
             console.log('Searching for:', query);  // Debugging line to check the query value
 
             try {
