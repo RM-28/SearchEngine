@@ -96,7 +96,7 @@
         console.log('Searching for:', query);  // Debugging line to check the query value
 
         try {
-            const fetchResponse = await fetch(`http://localhost:5000/search?q=${encodeURIComponent(query)}`);
+            const fetchResponse = await fetch(`https://searchengineserver.onrender.com/search?q=${encodeURIComponent(query)}`);
             const results = await fetchResponse.json();
             console.log('Search results:', results);  // Log the results
 
