@@ -1,3 +1,8 @@
+#Name: Raj Mamidala, Matt Yu, Adithya Raj
+#Course: CMPSCI 221
+#Date: 12/13/2024
+#File Description: Back End for html file
+
 from flask import Flask, request, jsonify
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from flask_cors import CORS
