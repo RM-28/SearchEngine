@@ -70,7 +70,7 @@
 <body>
 
 <div class="container">
-    <h2>Search & Upload</h2>
+    <h2>Search</h2>
     
     <form action="/search" method="GET" class = "search-bar">
         <label for="search">Search:</label><br>
@@ -80,37 +80,32 @@
         <button type="submit" onclick = "Search()">Search</button><br><br>
         <textarea id="answer" name="w3review" rows="4" cols="50"></textarea>
     </form>
-<!-- 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <label for="file">Upload a file:</label><br>
-        <input type="file" id="file" name="file"><br>
-        <button type="submit">Upload</button>
-    </form> -->
 </div>
 <script>
-    
+    //
     async function Search() {
-        event.preventDefault();  // Prevent the form from submitting normally
+        // Prevent the form from submitting normally
+        event.preventDefault();  
 
         const query = document.getElementById('search').value;
-        console.log('Searching for:', query);  // Debugging line to check the query value
+        // Debugging line to check if query is being sent
+        console.log('Searching for:', query);  
 
         try {
-            const fetchResponse = await fetch(`https://searchengineserver.onrender.com/search?q=${encodeURIComponent(query)}`);
+            //
+            const fetchResponse = await fetch(`http://localhost:5000/search?q=${encodeURIComponent(query)}`);
             const results = await fetchResponse.json();
-            console.log('Search results:', results);  // Log the results
+            // Log and check the results
+            console.log('Search results:', results);  
 
             const text = document.getElementById('answer');
-            text.innerHTML = '';  // Clear previous results
+            // Clear previous results
+            text.innerHTML = '';  
             text.append(results)
-            // Assuming the response is a list of results with title, href, and body
-            // results.forEach(item => {
-            //     const resultItem = document.createElement('div');
-            //     resultItem.innerHTML = `<h3><a href="${item.href}">${item.title}</a></h3><p>${item.body}</p>`;
-            //     div.appendChild(resultItem);
-            // });
-        } catch (error) {
-            console.error('Error fetching search results:', error);  // Log any errors
+        } 
+        // Check for errors and log if anything occurs    
+        catch (error) { 
+            console.error('Error fetching search results:', error); 
         }
     }
 </script>
